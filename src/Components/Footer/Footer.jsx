@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useState} from "react";
+
 import './Footer.sass';
 
 import { HandySvg } from 'handy-svg';
@@ -9,6 +10,28 @@ import socials from '../Images/Socials.svg';
 import sms from '../Images/sms.svg';
 
 const Footer = () => {
+
+    const [email, setEmail] = useState('');
+
+    const sendEmail = () => {
+        // Regular expression for email validation
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+        // Check if email is provided and valid
+        if (!email) {
+          alert('Please enter an email.');
+          return;
+        }
+    
+        if (!emailPattern.test(email)) {
+          alert('Please enter a valid email address.');
+          return;
+        }
+    
+        // Simulate email sending
+        alert('Email sent successfully!');
+      };
+
     return(
         <div className="footer">
             <div className="wrapper">
@@ -61,8 +84,16 @@ const Footer = () => {
                             width="18"
                             height="16"
                             fill = "none" />
-                        <input type="text" className="include" placeholder="Enter your Email" />
-                        <button className="submit">Submit</button>
+                        <input 
+                        type="text" 
+                        className="include"
+                        placeholder="Enter your Email" 
+                        value={email} 
+                        onChange={(e) => setEmail(e.target.value)}
+                        />
+                        <button 
+                        onClick={sendEmail}
+                        className="submit">Submit</button>
                     </div>
                     </div>
                     <div className="scnetwork">
